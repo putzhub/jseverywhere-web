@@ -1,8 +1,8 @@
-import React from "react";
-import { useQuery, useMutation } from "@apollo/client";
+import React from 'react';
+import { useQuery, useMutation } from '@apollo/client';
 
 //import the Note component
-import Note from "../components/Note";
+import NoteForm from "../components/NoteForm";
 //import the GET_NOTE query
 import { GET_NOTE, GET_ME } from '../gql/query';
 import { EDIT_NOTE } from '../gql/mutation';
@@ -27,13 +27,13 @@ const EditNote = props => {
     if(loading) return 'Loading...';
     if(error) return `Error! ${error.message}`;
     //if the current user and the author of th enote do not match
-    if(userdata.me.id != data.note.author.id) {
+    if(userdata.me.id !== data.note.author.id) {
         return <p>You do not have access to edit this note</p>;
     }
 
     //if the query is sucessful and there are notes, return the feed of notes
     //else if the query is successful and there aren't notes, display a message
-    return <Note note={data.note.content} action={editNote} />;
+    return <NoteForm content={data.note.content} action={editNote} />;
 }
 
 export default EditNote;
